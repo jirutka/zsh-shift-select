@@ -1,0 +1,112 @@
+= Zsh Shift Select Mode
+:proj-name: zsh-shift-select
+:gh-name: jirutka/{proj-name}
+// Enable kbd:[] macro
+:experimental:
+
+Emacs https://www.gnu.org/software/emacs/manual/html_node/emacs/Shift-Selection.html[shift-select mode] for Zsh – select text in the command line using kbd:[Shift] as in many text editors, browsers and other GUI programs.
+
+This plugin does not override any existing widgets and binds only **shift**ed keys (see <<Key Bindings>>).
+It creates a new `shift-select` keymap that is automatically activated when the shift selection is invoked (using any of the defined **shift**ed keys) and deactivated (the current keymap switches back to `main`) on any key that is not defined in the `shift-select` keymap.
+Thanks to this approach, it does not interfere with other plugins (for example, it works with https://github.com/zsh-users/zsh-autosuggestions[zsh-autosuggestions] without any change).
+
+Key bindings for moving the cursor _without_ selection (e.g. kbd:[Ctrl] + arrows, kbd:[Home] etc.) are out of scope of this plugin.
+
+
+== Key Bindings
+
+
+==== List of keys defined in the `emacs` and `shift-select` keymap:
+
+* kbd:[Shift + Left Arrow] – select one character to the left
+* kbd:[Shift + Right Arrow] – select one character to the right
+* kbd:[Shift + Up Arrow] – select one line up
+* kbd:[Shift + Down Arrow] – select one line down
+* kbd:[Shift + Home] or kbd:[Shift + Ctrl + A] – select to the beginning of a line
+* kbd:[Shift + End] or kbd:[Shift + Ctrl + E] – select to the end of a line
+* kbd:[Shift + Ctrl + Left Arrow] ^<<macos>>^ – select to the beginning of a word
+* kbd:[Shift + Ctrl + Right Arrow] ^<<macos>>^ – select to the end of a word
+* kbd:[Shift + Ctrl + Home] ^<<macos>>^ – select to the beginning of an input buffer
+* kbd:[Shift + Ctrl + End] ^<<macos>>^ – select to the end of an input buffer
+
+[[macos, ]]
+_^^ The last four actions use kbd:[Shift + Option] instead of kbd:[Shift + Ctrl] on macOS._
+
+
+==== List of keys defined in the `shift-select` keymap only:
+
+* kbd:[Delete] or kbd:[Backspace] – delete selected text
+
+If you want to add custom key bindings to manipulate with active selection, define them in the `shift-select` keymap (`bindkey -M shift-select ...`).
+
+TIP: You can use default kbd:[Alt + W] or kbd:[Ctrl + W] key bindings to copy (`copy-region-as-kill`) or cut (`backward-kill-word`) selected text to the “kill buffer”, and kbd:[Ctrl + Y] to paste (`yank`) the contents of the “kill buffer”.
+
+
+== Known Issues
+
+Some keys may not work in your terminal by default.
+For example, https://sw.kovidgoyal.net/kitty/[kitty] uses kbd:[Shift + Ctrl] as the modifier for all kitty’s shortcuts (this can be changed with https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.kitty_mod[kitty_mod]).
+To find out if this is the case, run `cat` (without any arguments) in your terminal and press the key sequence in question. If nothing is printed, it means that your terminal or operating system has intercepted the key sequence.
+
+
+== Installation
+
+=== Using sheldon
+
+If you use https://github.com/rossmacarthur/sheldon[sheldon] plugin manager, run the following command:
+
+[source, sh, subs="+attributes"]
+sheldon add {proj-name} --github {gh-name}
+
+
+=== Using zgen
+
+If you use https://github.com/tarjoilija/zgen[zgen] plugin manager, add `zgen load "{gh-name}"` to your `.zshrc`.
+
+
+=== Using Oh My Zsh
+
+If you use https://github.com/ohmyzsh/ohmyzsh[Oh My Zsh] framework:
+
+. Clone this repository into `$ZSH_CUSTOM/plugins` (by default `~/.oh-my-zsh/custom/plugins`):
++
+[source, sh, subs="+attributes"]
+git clone https://github.com/{gh-name}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/{proj-name}
+
+. Add the plugin to the list of plugins for Oh My Zsh to load (inside `$ZDOTDIR/.zshrc`, by default `~/.zshrc`):
++
+[source, sh, subs="+attributes"]
+plugins=(
+    # other plugins...
+    {proj-name}
+)
+
+. Start a new terminal session.
+
+
+=== Manually (Git Clone)
+:plugin-dir: ~/.local/share/zsh/plugins/{proj-name}
+
+. Clone this repository somewhere on your machine. This guide will assume `{plugin-dir}`.
++
+[source, sh, subs="+attributes"]
+git clone https://github.com/{gh-name} {plugin-dir}
+
+. Add the following to your `$ZDOTDIR/.zshrc` (by default `~/.zshrc`):
++
+[source, sh, subs="+attributes"]
+source {plugin-dir}/{proj-name}.plugin.zsh
+
+. Start a new terminal session.
+
+
+== References
+
+* https://stackoverflow.com/questions/5407916/zsh-zle-shift-selection[Zsh zle shift selection – StackOverflow] (the first inspiration, but the used approach is different)
+* https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html[Zsh Line Editor]
+
+
+== License
+
+This project is licensed under http://opensource.org/licenses/MIT/[MIT License].
+For the full text of the license, see the link:LICENSE[LICENSE] file.
