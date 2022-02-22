@@ -5,6 +5,7 @@
 # Emacs shift-select mode for Zsh - select text in the command line using Shift
 # as in many text editors, browsers and other GUI programs.
 #
+# Version: 0.1.0
 # Homepage: <https://github.com/jirutka/zsh-shift-select>
 
 emulate -L zsh
