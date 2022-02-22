@@ -59,9 +59,9 @@ If you use https://github.com/rossmacarthur/sheldon[sheldon] plugin manager, run
 sheldon add {proj-name} --github {gh-name}
 
 
-=== Using zgen
+=== Using zgenom
 
-If you use https://github.com/tarjoilija/zgen[zgen] plugin manager, add `zgen load "{gh-name}"` to your `.zshrc`.
+If you use https://github.com/jandamm/zgenom[zgenom] (successor of https://github.com/tarjoilija/zgen[zgen]) plugin manager, add `zgenom load "{gh-name}"` to your `.zshrc`.
 
 
 === Using Oh My Zsh
