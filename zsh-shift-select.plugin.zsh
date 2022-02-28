@@ -8,8 +8,6 @@
 # Version: 0.1.0
 # Homepage: <https://github.com/jirutka/zsh-shift-select>
 
-emulate -L zsh
-
 # Move cursor to the end of the buffer.
 # This is an alternative to builtin end-of-buffer-or-history.
 function end-of-buffer() {
@@ -56,40 +54,44 @@ function shift-select::select-and-invoke() {
 	zle ${WIDGET#shift-select::} -w
 }
 
-# Create a new keymap for the shift-selection mode.
-bindkey -N shift-select
+function {
+	emulate -L zsh
 
-# Bind all possible key sequences to deselect-and-input, i.e. it will be used
-# as a fallback for "unbound" key sequences.
-bindkey -M shift-select -R '^@'-'^?' shift-select::deselect-and-input
+	# Create a new keymap for the shift-selection mode.
+	bindkey -N shift-select
 
-# Bind Shift keys in the emacs and shift-select keymaps.
-for	kcap   seq          seq_mac    widget (             # key name
-	kLFT   '^[[1;2D'    x          backward-char        # Shift + LeftArrow
-	kRIT   '^[[1;2C'    x          forward-char         # Shift + RightArrow
-	kri    '^[[1;2A'    x          up-line              # Shift + UpArrow
-	kind   '^[[1;2B'    x          down-line            # Shift + DownArrow
-	kHOM   '^[[1;2H'    x          beginning-of-line    # Shift + Home
-	x      '^[[97;6u'   x          beginning-of-line    # Shift + Ctrl + A
-	kEND   '^[[1;2F'    x          end-of-line          # Shift + End
-	x      '^[[101;6u'  x          end-of-line          # Shift + Ctrl + E
-	x      '^[[1;6D'    '^[[1;4D'  backward-word        # Shift + Ctrl/Option + LeftArrow
-	x      '^[[1;6C'    '^[[1;4C'  forward-word         # Shift + Ctrl/Option + RightArrow
-	x      '^[[1;6H'    '^[[1;4H'  beginning-of-buffer  # Shift + Ctrl/Option + Home
-	x      '^[[1;6F'    '^[[1;4F'  end-of-buffer        # Shift + Ctrl/Option + End
-); do
-	# Use alternative sequence (Option instead of Ctrl) on macOS, if defined.
-	[[ "$OSTYPE" = darwin* && "$seq_mac" != x ]] && seq=$seq_mac
+	# Bind all possible key sequences to deselect-and-input, i.e. it will be used
+	# as a fallback for "unbound" key sequences.
+	bindkey -M shift-select -R '^@'-'^?' shift-select::deselect-and-input
 
-	zle -N shift-select::$widget shift-select::select-and-invoke
-	bindkey -M emacs ${terminfo[$kcap]:-$seq} shift-select::$widget
-	bindkey -M shift-select ${terminfo[$kcap]:-$seq} shift-select::$widget
-done
+	# Bind Shift keys in the emacs and shift-select keymaps.
+	for	kcap   seq          seq_mac    widget (             # key name
+		kLFT   '^[[1;2D'    x          backward-char        # Shift + LeftArrow
+		kRIT   '^[[1;2C'    x          forward-char         # Shift + RightArrow
+		kri    '^[[1;2A'    x          up-line              # Shift + UpArrow
+		kind   '^[[1;2B'    x          down-line            # Shift + DownArrow
+		kHOM   '^[[1;2H'    x          beginning-of-line    # Shift + Home
+		x      '^[[97;6u'   x          beginning-of-line    # Shift + Ctrl + A
+		kEND   '^[[1;2F'    x          end-of-line          # Shift + End
+		x      '^[[101;6u'  x          end-of-line          # Shift + Ctrl + E
+		x      '^[[1;6D'    '^[[1;4D'  backward-word        # Shift + Ctrl/Option + LeftArrow
+		x      '^[[1;6C'    '^[[1;4C'  forward-word         # Shift + Ctrl/Option + RightArrow
+		x      '^[[1;6H'    '^[[1;4H'  beginning-of-buffer  # Shift + Ctrl/Option + Home
+		x      '^[[1;6F'    '^[[1;4F'  end-of-buffer        # Shift + Ctrl/Option + End
+	); do
+		# Use alternative sequence (Option instead of Ctrl) on macOS, if defined.
+		[[ "$OSTYPE" = darwin* && "$seq_mac" != x ]] && seq=$seq_mac
 
-# Bind keys in the shift-select keymap.
-for	kcap   seq        widget (                          # key name
-	kdch1  '^[[3~'    shift-select::kill-region         # Delete
-	bs     '^?'       shift-select::kill-region         # Backspace
-); do
-	bindkey -M shift-select ${terminfo[$kcap]:-$seq} $widget
-done
+		zle -N shift-select::$widget shift-select::select-and-invoke
+		bindkey -M emacs ${terminfo[$kcap]:-$seq} shift-select::$widget
+		bindkey -M shift-select ${terminfo[$kcap]:-$seq} shift-select::$widget
+	done
+
+	# Bind keys in the shift-select keymap.
+	for	kcap   seq        widget (                          # key name
+		kdch1  '^[[3~'    shift-select::kill-region         # Delete
+		bs     '^?'       shift-select::kill-region         # Backspace
+	); do
+		bindkey -M shift-select ${terminfo[$kcap]:-$seq} $widget
+	done
+}
