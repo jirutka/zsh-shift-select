@@ -64,6 +64,8 @@ function {
 	# as a fallback for "unbound" key sequences.
 	bindkey -M shift-select -R '^@'-'^?' shift-select::deselect-and-input
 
+	local kcap seq seq_mac widget
+
 	# Bind Shift keys in the emacs and shift-select keymaps.
 	for	kcap   seq          seq_mac    widget (             # key name
 		kLFT   '^[[1;2D'    x          backward-char        # Shift + LeftArrow
