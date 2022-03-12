@@ -12,6 +12,8 @@ Thanks to this approach, it does not interfere with other plugins (for example, 
 
 Key bindings for moving the cursor _without_ selection (e.g. kbd:[Ctrl] + arrows, kbd:[Home] etc.) are out of scope of this plugin.
 
+image::media/demo.gif[Example of using zsh-shift-select]
+
 
 == Key Bindings
 
