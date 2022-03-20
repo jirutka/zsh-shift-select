@@ -17,8 +17,7 @@ image::media/demo.gif[Example of using zsh-shift-select]
 
 == Key Bindings
 
-
-==== List of keys defined in the `emacs` and `shift-select` keymap:
+=== List of keys defined in the `emacs` and `shift-select` keymap:
 
 * kbd:[Shift + Left Arrow] – select one character to the left
 * kbd:[Shift + Right Arrow] – select one character to the right
@@ -35,7 +34,7 @@ image::media/demo.gif[Example of using zsh-shift-select]
 _^^ The last four actions use kbd:[Shift + Option] instead of kbd:[Shift + Ctrl] on macOS._
 
 
-==== List of keys defined in the `shift-select` keymap only:
+=== List of keys defined in the `shift-select` keymap only:
 
 * kbd:[Delete] or kbd:[Backspace] – delete selected text
 
