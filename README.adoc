@@ -86,6 +86,20 @@ plugins=(
 . Start a new terminal session.
 
 
+=== On Alpine Linux
+
+If you use https://alpinelinux.org/[Alpine Linux] v3.16+ or Edge, you can install {proj-name} via `apk` and load it using the plugin loader provided in the default Zsh configuration on Alpine (see `/etc/zsh/zshrc`).
+
+. Install {proj-name} package (as root).
+[source, sh, subs="+attributes"]
+apk add {proj-name}
+
+. Symlink {proj-name} plugin to your Zsh plugins directory footnote:[Alternatively, you can add `ZSH_LOAD_SYSTEM_PLUGINS=yes` to your `.zshenv` to automatically load all Zsh plugins installed from Alpine packages.]:
+[source, sh, subs="+attributes"]
+mkdir -p ~/.local/share/zsh/plugins
+ln -s /usr/share/zsh/plugins/{proj-name} ~/.local/share/zsh/plugins/
+
+
 === Manually (Git Clone)
 :plugin-dir: ~/.local/share/zsh/plugins/{proj-name}
 
