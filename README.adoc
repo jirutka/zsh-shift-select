@@ -10,7 +10,8 @@ This plugin does not override any existing widgets and binds only **shift**ed ke
 It creates a new `shift-select` keymap that is automatically activated when the shift selection is invoked (using any of the defined **shift**ed keys) and deactivated (the current keymap switches back to `main`) on any key that is not defined in the `shift-select` keymap.
 Thanks to this approach, it does not interfere with other plugins (for example, it works with https://github.com/zsh-users/zsh-autosuggestions[zsh-autosuggestions] without any change).
 
-Key bindings for moving the cursor _without_ selection (e.g. kbd:[Ctrl] + arrows, kbd:[Home] etc.) are out of scope of this plugin.
+Key bindings for moving the cursor _without_ selection (e.g. kbd:[Ctrl] + arrows, kbd:[Home] etc.) are out of scope of this plugin.footnote:[You can take inspiration from https://github.com/jirutka/alpine-zsh-config/blob/master/zshrc.d/50-key-bindings.zsh[key bindings in alpine-zsh-config].]
+So is synchronization with the system clipboard.footnote:[For an example, see https://github.com/jirutka/alpine-zsh-config/blob/master/zshrc.d/70-clipboard.zsh[clipboard integration in alpine-zsh-config].]
 
 image::media/demo.gif[Example of using zsh-shift-select]
 
