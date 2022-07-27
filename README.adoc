@@ -44,11 +44,35 @@ If you want to add custom key bindings to manipulate with active selection, defi
 TIP: You can use default kbd:[Alt + W] or kbd:[Ctrl + W] key bindings to copy (`copy-region-as-kill`) or cut (`backward-kill-word`) selected text to the “kill buffer”, and kbd:[Ctrl + Y] to paste (`yank`) the contents of the “kill buffer”.
 
 
-== Known Issues
+== Terminals Compatibility
 
 Some keys may not work in your terminal by default.
-For example, https://sw.kovidgoyal.net/kitty/[kitty] uses kbd:[Shift + Ctrl] as the modifier for all kitty’s shortcuts (this can be changed with https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.kitty_mod[kitty_mod]).
-To find out if this is the case, run `cat` (without any arguments) in your terminal and press the key sequence in question. If nothing is printed, it means that your terminal or operating system has intercepted the key sequence.
+To find out if this is the case, run `cat` (without any arguments) in your terminal and press the key sequence in question.
+If nothing is printed, it means that your terminal or operating system has intercepted the key sequence.
+
+This plugin has been tested in the following terminals:
+
+|===
+| Terminal  | State
+
+| Alacritty | ✔️ works out-of-box
+| Kitty     | ⚙️ kbd:[Shift + Ctrl] doesn’t work out-of-box, apply <<Kitty, fix>>
+|===
+
+
+=== Kitty
+
+https://sw.kovidgoyal.net/kitty/[Kitty] uses kbd:[Shift + Ctrl] as the modifier for all its shortcuts (https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.kitty_mod[kitty_mod]) by default.
+Add the following snippet to your `kitty.conf` to unmap the key strokes used by this plugin.
+
+[source]
+----
+# Don't intercept the following key strokes to make zsh-shift-select work.
+map ctrl+shift+left no_op
+map ctrl+shift+right no_op
+map ctrl+shift+page_up no_op
+map ctrl+shift+page_down no_op
+----
 
 
 == Installation
