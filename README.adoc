@@ -70,8 +70,8 @@ Add the following snippet to your `kitty.conf` to unmap the key strokes used by 
 # Don't intercept the following key strokes to make zsh-shift-select work.
 map ctrl+shift+left no_op
 map ctrl+shift+right no_op
-map ctrl+shift+page_up no_op
-map ctrl+shift+page_down no_op
+map ctrl+shift+home no_op
+map ctrl+shift+end no_op
 ----
 
 
