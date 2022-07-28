@@ -57,6 +57,7 @@ This plugin has been tested in the following terminals:
 
 | Alacritty | ✔️ works out-of-box
 | Kitty     | ⚙️ kbd:[Shift + Ctrl] doesn’t work out-of-box, apply <<Kitty, fix>>
+| WezTerm   | ⚙️ kbd:[Shift + Ctrl + arrows] doesn’t work out-of-box, apply <<WezTerm, fix>>
 |===
 
 
@@ -72,6 +73,22 @@ map ctrl+shift+left no_op
 map ctrl+shift+right no_op
 map ctrl+shift+home no_op
 map ctrl+shift+end no_op
+----
+
+
+=== WezTerm
+
+https://wezfurlong.org/wezterm/[WezTerm] uses kbd:[Shift + Ctrl + Left Arrow] and kbd:[Shift + Ctrl + Right Arrow] to activate a pane in the left and right direction, respectively (see https://wezfurlong.org/wezterm/config/default-keys.html[Default Key Assignments] in the docs).
+If you want to use these keys in Zsh instead, you can disable the default assignments in your `wezterm.lua`:
+
+[source, lua]
+----
+return {
+  keys = {
+    { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = 'DisableDefaultAssignment' },
+    { key = 'RightArrow', mods = 'CTRL|SHIFT', action = 'DisableDefaultAssignment' },
+  },
+}
 ----
 
 
