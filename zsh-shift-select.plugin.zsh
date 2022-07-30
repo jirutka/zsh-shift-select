@@ -1,4 +1,4 @@
-# vim: set ts=4:
+# vim: set ts=4 sw=4:
 # Copyright 2022-present Jakub Jirutka <jakub@jirutka.cz>.
 # SPDX-License-Identifier: MIT
 #
