@@ -31,10 +31,14 @@ function shift-select::kill-region() {
 }
 zle -N shift-select::kill-region
 
-# Deactivate the selection region, switch back to the main keymap and process
-# the typed keys again.
+# Replace the active region when a printable character is typed. For other
+# keys, deactivate the region and preserve the existing input behavior.
 function shift-select::deselect-and-input() {
-	zle deactivate-region -w
+	if [[ $KEYS == [[:print:]] ]]; then
+		zle kill-region -w
+	else
+		zle deactivate-region -w
+	fi
 	# Switch back to the main keymap (emacs).
 	zle -K main
 	# Push the typed keys back to the input stack, i.e. process them again,
