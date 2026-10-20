@@ -77,9 +77,9 @@ function {
 		kri    '^[[1;2A'    x          up-line              # Shift + UpArrow
 		kind   '^[[1;2B'    x          down-line            # Shift + DownArrow
 		kHOM   '^[[1;2H'    x          beginning-of-line    # Shift + Home
-		x      '^[[97;6u'   x          beginning-of-line    # Shift + Ctrl + A
+		x      '^[[97;6u'   '^[[1;10D' beginning-of-line    # Shift + (Ctrl + A)/(Cmd + LeftArrow)
 		kEND   '^[[1;2F'    x          end-of-line          # Shift + End
-		x      '^[[101;6u'  x          end-of-line          # Shift + Ctrl + E
+		x      '^[[101;6u'  '^[[1;10C' end-of-line          # Shift + (Ctrl + E)/(Cmd + RightArrow)
 		x      '^[[1;6D'    '^[[1;4D'  backward-word        # Shift + Ctrl/Option + LeftArrow
 		x      '^[[1;6C'    '^[[1;4C'  forward-word         # Shift + Ctrl/Option + RightArrow
 		x      '^[[1;6H'    '^[[1;4H'  beginning-of-buffer  # Shift + Ctrl/Option + Home
